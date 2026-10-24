@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Little Surprise</title>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="hearts-bg" id="heartsBg"></div>
+
+<main class="stage" id="stage">
+  <!-- Step 1: envelope -->
+  <section class="envelope-wrap" id="envelopeWrap">
+    <div class="envelope" id="envelope">
+      <div class="env-back"></div>
+      <div class="env-front"></div>
+      <div class="env-flap"></div>
+      <div class="seal" id="seal">♥</div>
+    </div>
+    <p class="label"><span>♥</span> A Little Surprise <span>♥</span></p>
+  </section>
+
+  <!-- Step 2: bow -->
+  <section class="bow-area" id="bowArea">
+    <div class="bow" id="bow">
+      <div class="arrow" id="arrow"></div>
+      <div class="bow-body"></div>
+      <div class="bow-string" id="bowString"></div>
+    </div>
+    <p class="hint" id="hint">Hold to draw the bow — release to shoot ♡</p>
+  </section>
+
+  <div class="flying-arrow" id="flyArrow"></div>
+
+  <!-- Step 3: pixel window -->
+  <div class="window" id="window" role="dialog" aria-label="Love letter">
+    <div class="titlebar">
+      <span>LOVE</span>
+      <i></i><i></i><i></i>
+    </div>
+    <div class="deco">♥ · ♥ · ♥</div>
+    <div class="content" id="content">
+      <p class="message" id="message">Happy 1 month, my love ♡<br>Still love me?</p>
+      <div class="cat-wrap">
+        <div class="cat" id="cat"></div>
+        <span class="cat-heart" style="left:8%;top:30%"></span>
+        <span class="cat-heart" style="left:78%;top:20%;animation-delay:.4s"></span>
+        <span class="cat-heart" style="left:48%;top:-8%;animation-delay:.8s"></span>
+      </div>
+      <div class="actions" id="actions">
+        <button class="btn yes" id="yes">YES</button>
+        <button class="btn no" id="no">NO</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
