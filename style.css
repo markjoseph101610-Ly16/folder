@@ -1,0 +1,98 @@
+:root{
+  --pink:#ff9fb2; --pink-2:#ffd1da; --rose:#e0566f; --red:#e8243c;
+  --cream:#fff0e0; --brown:#b9803f; --ink:#5a3140;
+  --ease:cubic-bezier(.34,1.56,.64,1);
+  --pixel:'Pixelify Sans','Courier New',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:var(--pixel); color:var(--ink); overflow:hidden;
+  background:linear-gradient(135deg,#ffc7d2 0%,#ffe6e0 45%,#fff0dc 100%);
+  user-select:none; touch-action:none;
+}
+.hearts-bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.hearts-bg i{position:absolute;color:var(--rose);opacity:.5;animation:drift linear infinite}
+@keyframes drift{from{transform:translateY(0)}to{transform:translateY(-110vh)}}
+
+.stage{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:8vh 16px 6vh}
+
+/* ---------- envelope ---------- */
+.envelope-wrap{display:flex;flex-direction:column;align-items:center;gap:18px;transition:opacity .5s,transform .6s}
+.envelope{position:relative;width:min(240px,60vw);aspect-ratio:1.45;filter:drop-shadow(0 6px 0 rgba(224,86,111,.25))}
+.env-back,.env-front,.env-flap{position:absolute;inset:0;border:3px solid var(--rose)}
+.env-back{background:#ffe3e8}
+.env-front{background:#fff;clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%);border:none;background:linear-gradient(#fff,#ffe8ec)}
+.env-flap{background:var(--pink);clip-path:polygon(0 0,100% 0,50% 58%);border:none;transform-origin:top;transition:transform .6s ease}
+.seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--red);color:#fff;font-size:20px;z-index:3;box-shadow:0 3px 0 #a81428;animation:hintpulse 1.4s ease-in-out infinite}
+.envelope.is-hit .env-flap{transform:rotateX(180deg)}
+.envelope.is-hit .seal{animation:none;transform:translate(-50%,-50%) scale(1.6);opacity:0;transition:.4s}
+.envelope.shake{animation:shake .35s}
+@keyframes shake{25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
+.label{font-size:15px;letter-spacing:.5px}
+.label span{color:var(--red)}
+
+/* ---------- bow ---------- */
+.bow-area{display:flex;flex-direction:column;align-items:center;gap:26px;transition:opacity .4s}
+.bow{position:relative;width:130px;height:70px;cursor:grab;touch-action:none}
+.bow-body{position:absolute;left:0;right:0;bottom:8px;height:44px;border:7px solid var(--brown);border-top-color:transparent;border-radius:0 0 90px 90px/0 0 60px 60px;transform:rotate(180deg)}
+.bow-string{position:absolute;left:6px;right:6px;top:28px;height:2px;background:#8a5a2b;transform-origin:center}
+.arrow{position:absolute;left:50%;bottom:0;width:4px;height:52px;background:#8a5a2b;transform:translate(-50%,0);opacity:0;transform-origin:bottom center}
+.arrow::before{content:"";position:absolute;top:-8px;left:-5px;border:7px solid transparent;border-bottom:10px solid var(--red);border-top:0}
+.arrow.is-drawn{opacity:1}
+.hint{font-size:11px;opacity:.7;animation:hintpulse 1.8s ease-in-out infinite}
+@keyframes hintpulse{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(1)}50%{opacity:.95;transform:translate(-50%,-50%) scale(1.08)}}
+.hint{animation-name:hintfade}
+@keyframes hintfade{0%,100%{opacity:.55}50%{opacity:.95}}
+.seal{animation-name:hintpulse}
+
+.flying-arrow{position:fixed;width:4px;height:50px;background:#8a5a2b;z-index:20;display:none;transform-origin:bottom center}
+.flying-arrow::before{content:"";position:absolute;top:-8px;left:-5px;border:7px solid transparent;border-bottom:10px solid var(--red);border-top:0}
+
+/* ---------- pixel window ---------- */
+.window{
+  position:fixed;left:50%;top:50%;width:min(300px,86vw);margin:-170px 0 0 calc(min(300px,86vw) / -2);
+  background:#ffc4d0;border:3px solid var(--rose);box-shadow:0 8px 0 rgba(224,86,111,.35);
+  opacity:0;transform:scale(.6);visibility:hidden;z-index:10;
+}
+.window.is-open{
+  opacity:1;transform:scale(1);visibility:visible;transition:opacity .4s ease,transform .55s var(--ease);
+}
+.titlebar{display:flex;align-items:center;gap:5px;background:var(--pink);padding:4px 8px;font-size:10px;color:#fff;border-bottom:3px solid var(--rose)}
+.titlebar span{margin-right:auto}
+.titlebar i{width:9px;height:9px;background:#fff;border:2px solid var(--rose)}
+.deco{text-align:center;background:#ffd9e0;color:var(--red);font-size:10px;padding:3px;border-bottom:3px solid var(--rose)}
+.content{position:relative;padding:18px 16px 22px;text-align:center;
+  background-color:#ffdbe3;
+  background-image:linear-gradient(45deg,#fff 25%,transparent 25%,transparent 75%,#fff 75%),linear-gradient(45deg,#fff 25%,transparent 25%,transparent 75%,#fff 75%);
+  background-size:12px 12px;background-position:0 0,6px 6px}
+.message{font-size:17px;line-height:1.35;font-weight:600;min-height:46px}
+.cat-wrap{position:relative;width:112px;height:104px;margin:14px auto 10px}
+.cat{width:100%;height:100%}
+.cat svg{width:100%;height:100%;shape-rendering:crispEdges;display:block}
+.cat-heart{
+  position:absolute;width:26px;height:26px;z-index:3;opacity:0;pointer-events:none;
+  background:var(--red);clip-path:polygon(50% 100%,0 40%,0 15%,20% 0,50% 18%,80% 0,100% 15%,100% 40%);
+}
+.content.is-won .cat-heart{opacity:1;animation:floatHeart 1.8s ease-in-out infinite}
+@keyframes floatHeart{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-14px) scale(1.15)}}
+
+.actions{position:relative;height:56px}
+.btn{
+  position:absolute;top:8px;font-family:var(--pixel);font-size:12px;padding:6px 14px;cursor:pointer;
+  background:#fff;color:var(--ink);border:3px solid var(--rose);box-shadow:0 3px 0 var(--rose);
+  transition:left .25s var(--ease),top .25s var(--ease),transform .2s;
+}
+.btn.yes{left:calc(50% - 56px)}
+.btn.no{left:calc(50% + 6px)}
+.btn.yes:hover{background:var(--red);color:#fff;transform:scale(1.15)}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--rose)}
+.content.is-won .actions{display:none}
+
+/* floating particles for YES */
+.pop{position:fixed;pointer-events:none;z-index:30;font-size:22px;animation:pop 1.2s ease-out forwards}
+@keyframes pop{to{transform:translate(var(--dx),var(--dy)) scale(.4);opacity:0}}
+
+body.is-open .envelope-wrap{opacity:0;transform:translateY(-30px);pointer-events:none}
+body.is-open .bow-area{opacity:0;pointer-events:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
